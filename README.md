@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Overview
+
+![image](/images/react-boilerplate.png)
+
 ## Stack
 
 - [facebook/react](https://github.com/facebook/react) - View
