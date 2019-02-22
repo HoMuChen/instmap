@@ -1,7 +1,6 @@
 {
-  "name": "created-react-app",
+  "name": "react-boilerplate",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "antd": "^3.13.5",
     "babel-plugin-import": "^1.11.0",
@@ -16,8 +15,8 @@
   },
   "scripts": {
     "start": "NODE_PATH=src/ react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "build": "NODE_PATH=src/ react-app-rewired build",
+    "test": "NODE_PATH=src/ react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
