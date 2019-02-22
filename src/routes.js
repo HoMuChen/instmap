@@ -1,23 +1,38 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from "react-router-dom";
 
+import { AuthConsumer } from './contexts/AuthContext';
+
 import Home from './components/Home';
+import Login from './components/Login';
+const About = lazy(() => import('./modules/About'));
+const Topics = lazy(() => import('./modules/Topics'));
 
-const About = lazy(() => import('./components/About'));
-const Topics = lazy(() => import('./components/Topics'));
+const ProtectedRoute = ({ component: Component, ...rest }) => (
+  <AuthConsumer>
+    {
+      ({ isAuth }) => (
+        <Route
+          { ...rest }
+          render={
+            props => isAuth
+              ? <Component {...rest} />
+              : <Login />
+          }
+        />
+      )
+    }
+  </AuthConsumer>
+);
 
-class Routes extends Component {
-  render() {
-    return (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Suspense fallback={<div>loading...</div>}>
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
-        </Suspense>
-      </Switch>
-    )
-  }
-}
+const Routes = () => (
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Suspense fallback={null}>
+      <ProtectedRoute path="/about" component={About} />
+      <ProtectedRoute path="/topics" component={Topics} />
+    </Suspense>
+  </Switch>
+)
 
 export default Routes;

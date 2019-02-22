@@ -15,7 +15,7 @@
     "react-scripts": "2.1.5"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "NODE_PATH=src/ react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
@@ -29,5 +29,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:5000" 
+  "proxy": "http://localhost:5000"
 }

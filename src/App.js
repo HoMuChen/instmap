@@ -1,69 +1,24 @@
-import React, { Component } from 'react';
-import './App.css';
-import {
-  Layout, Menu, Icon,
-} from 'antd';
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import Routes from './routes';
-const {
-  Header, Content, Footer, Sider,
-} = Layout;
+import React from 'react';
+import Layout from './components/Layout';
+import SideNav from './components/SideNav';
+import Header from './components/Header';
+import Routes from './Routes';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      routes: [
-        { key: '1', icon: 'pie-chart', lable: 'Home', path: '/' },
-        { key: '2', icon: 'pie-chart', lable: 'About', path: '/about' },
-        { key: '3', icon: 'pie-chart', lable: 'Topics', path: '/topics' },
-      ],
-      collapsed: false,
-    };
-  }
+import { AuthProvider } from './contexts/AuthContext';
 
-  toggle = () => {
-    this.setState((state) => ({ collapsed: !state.collapsed }))
-  }
+import config from './config';
 
-  render() {
-    return (
-      <Router>
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider
-            breakpoint="lg"
-            collapsedWidth="0"
-          >
-            <div className="logo">
-              Largitdata
-            </div>
-            <Menu theme="dark" mode="inline">
-            {
-              this.state.routes.map(route => (
-                <Menu.Item key={route.key}>
-                  <Link to={route.path}>
-                    <Icon type={route.icon} />
-                    <span>{ route.lable }</span>
-                  </Link>
-                </Menu.Item>
-              ))
-            }
-            </Menu>
-          </Sider>
-          <Layout>
-            <Header className="header">
-            </Header>
-            <Content className="content">
-              <Routes />
-            </Content>
-            <Footer className="footer">
-              Largitdata ©2018
-            </Footer>
-          </Layout>
-        </Layout>
-      </Router>
-    );
-  }
-}
+const App = () => (
+  <AuthProvider>
+    <Layout
+      title='HoMuChen'
+      navigation={<SideNav routes={config.routes}/>}
+      header={<Header routes={config.headers}/>}
+      footer='b98901052@ntu.edu.tw ©2019'
+    >
+      <Routes />
+    </Layout>
+  </AuthProvider>
+)
 
 export default App;
