@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from './components/Layout';
 import SideNav from './components/SideNav';
 import Header from './components/Header';
-import Routes from './Routes';
+import Routes from './routes';
 
 import { AuthProvider } from './contexts/AuthContext';
 
