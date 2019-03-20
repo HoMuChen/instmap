@@ -1,10 +1,13 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+
 import Layout from './components/Layout';
-import SideNav from './components/SideNav';
 import Header from './components/Header';
 import Routes from './routes';
 
 import { AuthProvider } from './contexts/AuthContext';
+
+import store from './store';
 
 import config from './config';
 
@@ -12,11 +15,11 @@ const App = () => (
   <AuthProvider>
     <Layout
       title='HoMuChen'
-      navigation={<SideNav routes={config.routes}/>}
       header={<Header routes={config.headers}/>}
-      footer='b98901052@ntu.edu.tw ©2019'
     >
-      <Routes />
+      <Provider store={store}>
+        <Routes />
+      </Provider>
     </Layout>
   </AuthProvider>
 )

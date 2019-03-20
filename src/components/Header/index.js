@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Icon,
+  Icon, Menu,
 } from 'antd';
 import { Link } from 'react-router-dom';
 import './index.css'
@@ -12,19 +12,27 @@ const Header = ({ routes }) => (
     {
       ({ isAuth, login, logout }) => (
         <div className='header'>
-          {
-            isAuth && routes.map(route => (
-              <Link to={route.path}>
-                <Icon key={route.key} className='trigger' type={route.icon}>
-                </Icon>
-              </Link>
-            ))
-          }
-          {
-            isAuth
-              ? <Icon className='trigger' onClick={logout} type='logout'/>
-              : <Icon className='trigger' onClick={login} type='login'/>
-          }
+          <Menu mode="horizontal" style={{ lineHeight: '64px' }} defaultSelectedKeys={['popular']}>
+            {
+              routes.map(route => (
+                <Menu.Item key={route.key}>
+                  <Link to={route.path}>
+                    <Icon type={route.icon} />
+                    <span>{ route.lable }</span>
+                  </Link>
+                </Menu.Item>
+              ))
+            }
+            {/*
+            <div className='auth'>
+              {
+                isAuth
+                  ? <Icon className='trigger' onClick={logout} type='logout'/>
+                  : <Icon className='trigger' onClick={login} type='login'/>
+              }
+            </div>
+            */}
+          </Menu>
         </div>
       )
     }

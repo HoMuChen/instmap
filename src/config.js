@@ -21,16 +21,16 @@ const config = {
   ],
   headers: [
     {
-      key: 'messages',
-      lable: '訊息',
-      icon: 'bell',
-      path: '/messages',
+      key: 'popular',
+      lable: '熱門',
+      icon: 'rise',
+      path: '/',
     },
     {
-      key: 'settinng',
-      lable: '設定',
-      icon: 'setting',
-      path: '/setting',
+      key: 'near',
+      lable: '附近',
+      icon: 'environment',
+      path: '/near',
     },
   ]
 }

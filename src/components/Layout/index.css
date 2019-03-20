@@ -8,26 +8,25 @@
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: #fff;
   padding: 0;
+  z-index: 100;
 }
 
 .content {
-  margin: 36px;
+  max-width: 720px;
+  width: 100%;
+  margin: auto;
+  margin-top: 76px;
 }
 
 .footer {
   text-align: center;
-}
-
-.trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color .3s;
-}
-
-.trigger:hover {
-  color: #1890ff;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

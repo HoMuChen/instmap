@@ -1,6 +1,10 @@
 .header {
-  float: right;
   height: '100%';
+  line-height: 64px;
+}
+
+.auth {
+  float: right;
 }
 
 .trigger {
