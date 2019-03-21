@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import InfiniteArticleList from '../../components/InfiniteArticleList';
 
+import { sendPageview } from '../../utils/ga';
+
 import {
   fchLocations,
   changeLoading,
@@ -10,6 +12,8 @@ import {
 
 class Home extends React.Component {
   componentDidMount() {
+    sendPageview('/')
+
     if(this.props.locations.size === 0) {
       this.props.fchLocations(10);
     }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import makeActionCreator from '../../utils/ActionHelpers';
+import { sendEvent } from '../../utils/ga';
 
 export const CHANGE_LOADING             = 'NEAR/CHANGE_LOADING';
 export const CHANGE_CENTER              = 'NEAR/CHANGE_CENTER';
@@ -18,8 +19,9 @@ export const changeFocusedIndex         = makeActionCreator(CHANGE_FOCUSED_INDEX
 export const FCH_LOCATIONS_DONE         = 'NEAR/FCH_LOCATIONS_DONE';
 export const fchLocationsDone           = makeActionCreator(FCH_LOCATIONS_DONE, 'locations');
 
-export const fchLocations = (lat, lng, distance, limit, page) =>
-  dispatch => {
-    axios(`/api/locations/near?lat=${lat}&lng=${lng}&distance=${distance}&limit=${limit}&page=${page}`)
-      .then(_ => dispatch( fchLocationsDone(_.data) ));
-  }
+export const fchLocations = (lat, lng, distance, limit, page) => dispatch => {
+  sendEvent({ action: 'view_item_list', value: limit, label: 'locations', category: 'engagement' });
+
+  axios(`/api/locations/near?lat=${lat}&lng=${lng}&distance=${distance}&limit=${limit}&page=${page}`)
+    .then(_ => dispatch( fchLocationsDone(_.data) ));
+}

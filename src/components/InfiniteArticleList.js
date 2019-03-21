@@ -39,7 +39,9 @@ class InfiniteArticleList extends PureComponent {
   };
 
   handleOnHover = (id) => () => {
-    this.props.changeFocusedLocation(id);
+    if(this.props.changeFocusedLocation) {
+      this.props.changeFocusedLocation(id);
+    }
   }
 
   render() {
@@ -84,8 +86,8 @@ class InfiniteArticleList extends PureComponent {
 }
 
 InfiniteArticleList.propTypes = {
-  data:                  PropTypes.array.isRequired,
-  focusedLocation:       PropTypes.string.isRequired,
+  data:                  PropTypes.object.isRequired,
+  focusedLocation:       PropTypes.string,
   isLoading:             PropTypes.bool.isRequired,
   isShowDist:            PropTypes.bool.isRequired,
   onLoadMore:            PropTypes.func.isRequired,

@@ -8,6 +8,7 @@ import {
   Skeleton,
 } from 'antd'
 
+import { sendPageview } from '../../utils/ga';
 import InfiniteMedias from '../../components/InfiniteMedias';
 
 import {
@@ -20,6 +21,8 @@ import {
 
 class Location extends React.Component {
   componentDidMount() {
+    sendPageview(`/location/${this.props.id}`);
+
     this.props.changeLoading('location', true);
     this.props.changeLoading('media', true);
 

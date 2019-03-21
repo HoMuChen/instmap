@@ -29,7 +29,7 @@ class InfiniteMedias extends PureComponent {
       document.body.scrollHeight;
     const clientHeight =
       document.documentElement.clientHeight || window.innerHeight;
-    const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+    const scrolledToBottom = Math.ceil(scrollTop + clientHeight + 10) >= scrollHeight;
 
     if (scrolledToBottom && !this.props.isLoading) {
       this.props.onLoadMore();
@@ -51,9 +51,21 @@ class InfiniteMedias extends PureComponent {
           {
             display === 0 &&
             data.valueSeq().map((media, url) => (
-              <Col span={8} style={{ marginBottom: isXS? 8: 16 }}>
+              <Col key={url} span={8} style={{ marginBottom: isXS? 8: 16 }}>
                 <div style={{ width: '100%', overFlow: 'hidden', position: 'relative', paddingBottom: '100%' }}>
-                  <img alt='hi' style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', left: 0, top: 0 }}src={media.get('image_url')} />
+                  <a target='_blank' rel="noopener noreferrer" href={media.get('url')}>
+                    <img alt='...'
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        position: 'absolute',
+                        left: 0,
+                        top: 0
+                      }}
+                      src={media.get('image_url')}
+                    />
+                  </a>
                 </div>
               </Col>
             ))
@@ -70,7 +82,7 @@ class InfiniteMedias extends PureComponent {
                   title={`${media.get('like_count')}個讚, ${media.get('comment_cout')}個回覆`}
                   description={DateTime.fromSeconds(media.get('tm')).toFormat('FF')}
                   avatar={
-                    <a target='_blank' href={media.get('url')}>
+                    <a target='_blank' rel="noopener noreferrer" href={media.get('url')}>
                       <Avatar style={{ width: 48, height: 48 }} src={media.get('image_url')} />
                     </a>
                   }
@@ -87,7 +99,7 @@ class InfiniteMedias extends PureComponent {
 }
 
 InfiniteMedias.propTypes = {
-  data:                  PropTypes.array.isRequired,
+  data:                  PropTypes.object.isRequired,
   display:               PropTypes.number.isRequired,
   isLoading:             PropTypes.bool.isRequired,
   onLoadMore:            PropTypes.func.isRequired,

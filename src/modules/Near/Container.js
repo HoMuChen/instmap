@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { Icon } from 'antd';
+
+import { sendPageview } from '../../utils/ga';
 import InfiniteArticleList from '../../components/InfiniteArticleList';
 import MyMap from '../../components/MyMap';
 
@@ -15,6 +18,8 @@ import {
 class NearestLocations extends React.Component {
 
   componentDidMount() {
+    sendPageview('/near');
+
     const { locations, center, distance, limit, page } = this.props;
 
     if(locations.size === 0) {
@@ -66,6 +71,9 @@ class NearestLocations extends React.Component {
             onCenterChange={changeCenter}
             onZoomChange={changeZoom}
           />
+          <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
+            <Icon type='environment' theme="filled" style={{ fontSize: 24, color: 'red' }}/>
+          </div>
         </div>
         <div style={{ marginTop: 250 }}>
           <InfiniteArticleList

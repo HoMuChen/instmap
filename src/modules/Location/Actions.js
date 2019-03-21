@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import makeActionCreator from '../../utils/ActionHelpers';
+import { sendEvent } from '../../utils/ga';
 
 export const CHANGE_LOADING             = 'LOCATION/CHANGE_LOADING';
 export const changeLoading              = makeActionCreator(CHANGE_LOADING, 'target', 'isLoading');
@@ -26,9 +27,13 @@ export const getLocation = (id) => dispatch => {
 }
 
 export const fchMedias = (id, from) => dispatch => {
+  const limit = 15;
+
+  sendEvent({ action: 'view_item_list', value: limit, label: 'medias', category: 'engagement' });
+
   const endpoint = from
-    ? `/api/locations/${id}/medias?limit=${15}&from=${from}`
-    : `/api/locations/${id}/medias?limit=${15}`
+    ? `/api/locations/${id}/medias?limit=${limit}&from=${from}`
+    : `/api/locations/${id}/medias?limit=${limit}`
 
   axios(endpoint)
     .then(_ => {

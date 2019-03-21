@@ -36,18 +36,20 @@ class MyMap extends React.Component {
       >
       {
         locations.map((loc, i) => 
-          <Icon
+          <div
             key={loc.id}
             lat={loc.latitude}
             lng={loc.longitude}
+          >
+          <Icon
             type="environment"
             theme="filled"
             style={ loc.id === focusedLocation? focusedStyle: style }
             twoToneColor="#79a2b5"
           />
+          </div>
         )
       }
-        <Icon type='environment' theme="filled" style={{ fontSize: 24, color: 'red' }} lat={center.lat} lng={center.lng} />
       </GoogleMapReact>
     )
   }
