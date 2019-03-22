@@ -13,6 +13,7 @@ import {
   changeZoom,
   changeFocusedLocation,
   changeFocusedIndex,
+  changeLoading,
 } from './Actions';
 
 class NearestLocations extends React.Component {
@@ -43,6 +44,7 @@ class NearestLocations extends React.Component {
     const { center, distance, limit, page, hasNextPage } = this.props;
 
     if(hasNextPage) {
+      this.props.changeLoading(true);
       this.props.fchLocations(center.get('lat'), center.get('lng'), distance, limit, page);
     }
   }
@@ -135,5 +137,6 @@ export default connect(
     changeZoom,
     changeFocusedLocation,
     changeFocusedIndex,
+    changeLoading,
   }
 )(NearestLocations);
