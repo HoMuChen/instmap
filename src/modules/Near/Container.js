@@ -47,6 +47,19 @@ class NearestLocations extends React.Component {
     }
   }
 
+  handleUserPosition = () => {
+    if(!navigator.geolocation) {
+      alert('此瀏覽器不支援地理位置資訊')
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.props.changeCenter({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      })
+    })
+  }
+
   render() {
     const {
       locations,
@@ -73,6 +86,20 @@ class NearestLocations extends React.Component {
           />
           <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
             <Icon type='environment' theme="filled" style={{ fontSize: 24, color: 'red' }}/>
+          </div>
+          <div
+            onClick={this.handleUserPosition}
+            style={{
+              backgroundColor: '#fff',
+              width: 40,
+              height: 40,
+              position: 'absolute',
+              bottom: 125,
+              right: 10,
+              padding: 7
+            }}
+          >
+            <Icon type='user' style={{ fontSize: 24, color: '#555' }}/>
           </div>
         </div>
         <div style={{ marginTop: 250 }}>

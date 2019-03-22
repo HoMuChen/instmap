@@ -21,8 +21,8 @@ const locations = (_=locationsInitState, action) => {
 
 const configtInitState = Immutable.fromJS({
   center: {
-    lat: 25.0419115,
-    lng: 121.5317922,
+    lat: 25.048560010655365,
+    lng: 121.51690057554924,
   },
   zoom: 15,
   isLoading: false,
