@@ -4,7 +4,7 @@ Browse Taiwan Instagram locations on the map!
 
 ## Overview
 
-![image](/images/instmap.png)
+![image](/images/instmap.jpg)
 
 ## Stack
 
