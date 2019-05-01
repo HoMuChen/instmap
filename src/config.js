@@ -32,6 +32,12 @@ const config = {
       icon: 'environment',
       path: '/near',
     },
+    {
+      key: 'users',
+      lable: '名人',
+      icon: 'user',
+      path: '/users',
+    },
   ]
 }
 

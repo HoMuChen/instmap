@@ -13,7 +13,7 @@ import { sendPageview } from '../../utils/ga';
 import InfiniteMedias from '../../components/InfiniteMedias';
 
 import {
-  getLocation,
+  getUser,
   changeLoading,
   changeDisplay,
   fchMedias,
@@ -22,12 +22,12 @@ import {
 
 class Location extends React.Component {
   componentDidMount() {
-    sendPageview(`/location/${this.props.id}`);
+    sendPageview(`/users/${this.props.id}`);
 
-    this.props.changeLoading('location', true);
+    this.props.changeLoading('user', true);
     this.props.changeLoading('media', true);
 
-    this.props.getLocation(this.props.id);
+    this.props.getUser(this.props.id);
     this.props.fchMedias(this.props.id);
   }
 
@@ -49,14 +49,14 @@ class Location extends React.Component {
   render() {
     const {
       id,
-      location,
+      user,
       isLoadingLocation,
       isLoadingMedia,
       medias,
       display,
     } = this.props;
 
-    if(!location) return null;
+    if(!user) return null;
 
     return (
       <React.Fragment>
@@ -68,15 +68,21 @@ class Location extends React.Component {
                 actions={[
                   <Icon type="appstore" onClick={this.handleChangeDisplay(0)} />,
                   <Icon type="bars" onClick={this.handleChangeDisplay(1)} />,
-                  <Tooltip title='收藏此地點(尚未開放)'><Icon type="book" /></Tooltip>
+                  <Tooltip title='相片地圖(尚未開放)'>
+                    <Icon type="environment" onClick={this.handleChangeDisplay(2)} />
+                  </Tooltip>,
+                  <Tooltip title='收藏此用戶(尚未開放)'>
+                    <Icon type="book" />
+                  </Tooltip>
                 ]}
               >
                 <Card.Meta
                   key={id}
-                  title={location.get('name')}
-                  description={`文章數: ${location.get('media_count')}`}
-                  avatar={<Avatar style={{ width: 48, height: 48 }} src={location.get('profile_pic_url')}/>}
+                  title={<a target='blank' href={`https://instagram.com/${user.get('username')}`}>{user.get('full_name')}</a>}
+                  description={`紛絲數: ${user.get('fans_count')}, 貼文數: ${user.get('media_count')}`}
+                  avatar={<Avatar style={{ width: 48, height: 48 }} src={user.get('profile_pic_url')}/>}
                 />
+                <div style={{ marginTop: 12 }}>{ user.get('biography') }</div>
               </Card>
         }
         <InfiniteMedias
@@ -93,15 +99,15 @@ class Location extends React.Component {
 export default connect(
   (state, props) => ({
     id:                 props.match.params.id,
-    location:           state.getIn(['location', 'location']),
-    medias:             state.getIn(['location', 'medias']),
-    from:               state.getIn(['location', 'config', 'from']),
-    hasNextPage:        state.getIn(['location', 'config', 'hasNextPage']),
-    isLoadingLocation:  state.getIn(['location', 'config', 'isLoading', 'location']),
-    isLoadingMedia:     state.getIn(['location', 'config', 'isLoading', 'media']),
-    display:            state.getIn(['location', 'config', 'display']),
+    user:               state.getIn(['singleUser', 'user']),
+    medias:             state.getIn(['singleUser', 'medias']),
+    from:               state.getIn(['singleUser', 'config', 'from']),
+    hasNextPage:        state.getIn(['singleUser', 'config', 'hasNextPage']),
+    isLoadingLocation:  state.getIn(['singleUser', 'config', 'isLoading', 'user']),
+    isLoadingMedia:     state.getIn(['singleUser', 'config', 'isLoading', 'media']),
+    display:            state.getIn(['singleUser', 'config', 'display']),
   }), {
-    getLocation,
+    getUser,
     changeLoading,
     changeDisplay,
     fchMedias,

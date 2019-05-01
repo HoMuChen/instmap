@@ -7,6 +7,8 @@ import { Route, Switch } from "react-router-dom";
 import Home from './modules/Home/Container';
 import Near from './modules/Near/Container';
 import Location from './modules/Location/Container';
+import Users from './modules/Users/Container';
+import SingleUser from './modules/SingleUser/Container';
 //const About = lazy(() => import('./modules/About'));
 //const Topics = lazy(() => import('./modules/Topics'));
 
@@ -31,9 +33,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/near" component={Near} />
-    <Route path="/locations/:id" component={Location} />
+    <Route exact path="/"              component={Home} />
+    <Route path="/near"                component={Near} />
+    <Route path="/locations/:id"       component={Location} />
+    <Route exact path="/users/:id"     component={SingleUser} />
+    <Route exact path="/users"         component={Users} />
     {/*
     <Suspense fallback={null}>
       <ProtectedRoute path="/about" component={About} />
