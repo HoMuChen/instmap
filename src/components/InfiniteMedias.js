@@ -38,6 +38,7 @@ class InfiniteMedias extends PureComponent {
 
   render() {
     const {
+      module,
       data,
       display,
       isLoading,
@@ -79,7 +80,9 @@ class InfiniteMedias extends PureComponent {
                 style={{ marginBottom: 8 }}
               >
                 <Card.Meta
-                  title={`${media.get('like_count')}個讚, ${media.get('comment_cout')}個回覆`}
+                  title={`
+                    ${media.get('like_count')}個讚, ${media.get('comment_cout')}個回覆, ${module === 'users'? media.get('location_name'): ''}
+                  `}
                   description={DateTime.fromSeconds(media.get('tm')).toFormat('FF')}
                   avatar={
                     <a target='_blank' rel="noopener noreferrer" href={media.get('url')}>
@@ -99,6 +102,7 @@ class InfiniteMedias extends PureComponent {
 }
 
 InfiniteMedias.propTypes = {
+  module:                PropTypes.string.isRequired,
   data:                  PropTypes.object.isRequired,
   display:               PropTypes.number.isRequired,
   isLoading:             PropTypes.bool.isRequired,

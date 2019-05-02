@@ -80,6 +80,7 @@ class Location extends React.Component {
               </Card>
         }
         <InfiniteMedias
+          module='locations'
           data={medias}
           display={display}
           isLoading={isLoadingMedia}

@@ -32,8 +32,8 @@ export const fchMedias = (id, from) => dispatch => {
   sendEvent({ action: 'view_item_list', value: limit, label: 'medias', category: 'engagement' });
 
   const endpoint = from
-    ? `/api/locations/${id}/medias?limit=${limit}&from=${from}`
-    : `/api/locations/${id}/medias?limit=${limit}`
+    ? `/api/users/${id}/medias?limit=${limit}&from=${from}`
+    : `/api/users/${id}/medias?limit=${limit}`
 
   axios(endpoint)
     .then(_ => {
